@@ -1,0 +1,8 @@
+进入项目目录
+	composer require encore/laravel-admin
+发布资源
+php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider
+php artisan admin:install
+如失败找到一下路径
+vendor\laravel\framework\src\Illuminate\Database\Schema\Builder.php
+$defaultStringLength=250；

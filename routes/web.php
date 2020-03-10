@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/api/plan/add', 'PlanController@addPlan');
+
 Route::get('/', function () {
     return view('welcome');
 });
