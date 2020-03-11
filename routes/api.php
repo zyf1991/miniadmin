@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Article;
+use App\Models\Plan;
+use App\Models\Custom;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,9 +18,24 @@ use App\Models\Article;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group(['middleware' => 'auth:api'], function() {
 
-Route::get('articles', function() {
-    // If the Content-Type and Accept headers are set to 'application/json',
-    // this will return a JSON structure. This will be cleaned up later.
-    return Article::all();
 });
+
+//获取计划
+Route::get('plan', 'PlanController@index');
+Route::get('plan/{id}', 'PlanController@show');
+Route::post('plan', 'PlanController@store');
+Route::put('plan/{id}', 'PlanController@update');
+Route::delete('plan/{id}', 'PlanController@delete');
+
+//获取计划
+Route::get('sign', 'SignController@index');
+Route::get('sign/{id}', 'SignController@show');
+Route::post('sign', 'SignController@store');
+Route::put('sign/{id}', 'SignController@update');
+Route::delete('sign/{id}', 'SignController@delete');
+
+
+Route::get('login', 'Auth\LoginController@login');
+Route::post('register', 'Auth\RegisterController@register');

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Custom extends Model
 {
     //
+    protected $table = 'custom';
     protected $fillable=[
-        'id',
         'name',
         'wxname',
         'sex',

@@ -14,7 +14,15 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    /*
+     * 计划过期天数
+     * */
+    'plan_expire_day'=>8,
+    'api_token'=>'aabbccdd',
+    //小程序appid
+    'AppID'=>'wxaa1f6a515f14f51e',
+    //小程序密钥
+    'AppSecret'=>'5c383354b40d20ef18578c6c2390f687',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
