@@ -1,0 +1,4 @@
+php artisan migrate --path=
+php artisan make:migration addtable --create category --path /database/migrations/addtable
+php artisan migrate --path /database/migrations/addcourse
+

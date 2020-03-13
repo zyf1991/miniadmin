@@ -25,7 +25,7 @@ class PlanController extends Controller
             'msg'=>'success',
             'data'=>$plan
         );
-        return response()->json($success, 201);;
+        return response()->json($success, 201);
     }
 
     public function store(Request $request)
@@ -37,6 +37,10 @@ class PlanController extends Controller
         );
         $input = $request->all();
         if(!isset($input['api_token']) || $input['api_token']!=config("app.api_token")) return response()->json($errdata, 201);
+        //任务没失效 不能加任务
+        $plan = Plan::find($id);
+        //if($plan && $plan)
+
         $sys_day =config("app.plan_expire_day");
         $sys_etime = date("Y-m-d H:i:s",strtotime("+".$sys_day." day"));
         $input['plan_stime']=date("Y-m-d H:i:s",time());

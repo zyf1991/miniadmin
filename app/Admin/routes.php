@@ -12,4 +12,9 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('admin.home');
 
+    //课程管理
+    $router->resource('course/index', 'CourseController');
+    //用户管理
+    $router->resource('custom/index', 'CustomController');
+
 });
