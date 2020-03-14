@@ -31,27 +31,20 @@ class PlanController extends Controller
     public function store(Request $request)
     {
 
-        $errdata=array(
-            'status'=>201,
-            'msg'=>'token error'
-        );
         $input = $request->all();
-        if(!isset($input['api_token']) || $input['api_token']!=config("app.api_token")) return response()->json($errdata, 201);
+        if(!isset($input['api_token']) || $input['api_token']!=config("app.api_token")) return response()->json(showMsg(201,'api_token'));
         //任务没失效 不能加任务
-        $plan = Plan::find($id);
-        //if($plan && $plan)
+        $plan = Plan::where('isexpired',0)->count();
+        if($plan>=3) return response()->json(showMsg(200,'您已经添加3个任务了'));
 
         $sys_day =config("app.plan_expire_day");
         $sys_etime = date("Y-m-d H:i:s",strtotime("+".$sys_day." day"));
-        $input['plan_stime']=date("Y-m-d H:i:s",time());
+        $input['plan_stime']=get_current_date();
         $input['sys_etime']=$sys_etime;
         $Plan = Plan::create($input);
 
-        $success=array(
-            'status'=>200,
-            'msg'=>'success'
-        );
-        return response()->json($success, 201);
+
+        return response()->json(showMsg(200,'添加成功'));
     }
 
     public function update(Request $request, Plan $Plan)

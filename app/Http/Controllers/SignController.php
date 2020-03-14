@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sign;
 use Illuminate\Http\Request;
 
-class SignController extends Controller
+class  SignController extends Controller
 {
     public function index()
     {
@@ -16,7 +16,7 @@ class SignController extends Controller
     public function show($id)
     {
 //        $Sign = Sign::find($id);
-//        $return_data['Sign_title'] = $Sign['Sign_title'];
+//        $return_data['Sign_title'] = $Sign['Sign_title'];  
 //        $between_time = strtotime($Sign['Sign_etime'])-strtotime($Sign['Sign_stime']);
 //        $day = floor($between_time / (3600*24));
 //        $return_data['Sign_etime'] = $day;
