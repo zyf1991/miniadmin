@@ -15,6 +15,12 @@ class Custom extends Model
         'age',
         'cardId',
         'birth',
+        'city',
+        'province',
+        'avatarurl',
         'tag',
+        'session_key',
+        'openid',
+        'gender'
     ];
 }

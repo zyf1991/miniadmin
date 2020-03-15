@@ -7,10 +7,25 @@ use App\Models\Plan;
 
 class PlanController extends Controller
 {
-    public function index()
+//    public function index()
+//    {
+//        //dd(config("app.sys_day"));
+//        return Plan::all();
+//    }
+
+    public function index(Request $request)
     {
-        //dd(config("app.sys_day"));
-        return Plan::all();
+        $request_data = $request->all();
+        //if(!isset($request_data['api_token']) || $request_data['api_token']!=config("app.api_token")) return response()->json(showMsg(201,'token error'), 201);
+
+        $plan = Plan::where('c_id',$request_data['c_id'])->get();
+        //dd($plan);
+//        $return_data['plan_title'] = $plan['plan_title'];
+//        $between_time = strtotime($plan['plan_etime'])-strtotime($plan['plan_stime']);
+//        $day = floor($between_time / (3600*24));
+//        $return_data['plan_etime'] = $day;
+
+        return response()->json(showMsg('200','success',$plan->toArray()));
     }
 
     public function show($id)
@@ -20,12 +35,8 @@ class PlanController extends Controller
         $between_time = strtotime($plan['plan_etime'])-strtotime($plan['plan_stime']);
         $day = floor($between_time / (3600*24));
         $return_data['plan_etime'] = $day;
-        $success=array(
-            'status'=>200,
-            'msg'=>'success',
-            'data'=>$plan
-        );
-        return response()->json($success, 201);
+
+        return response()->json(showMsg('200','success',$plan->toArray()));
     }
 
     public function store(Request $request)
@@ -35,7 +46,7 @@ class PlanController extends Controller
         if(!isset($input['api_token']) || $input['api_token']!=config("app.api_token")) return response()->json(showMsg(201,'api_token'));
         //任务没失效 不能加任务
         $plan = Plan::where('isexpired',0)->count();
-        if($plan>=3) return response()->json(showMsg(200,'您已经添加3个任务了'));
+        if($plan>=3) return response()->json(showMsg(201,'任务已有3个'));
 
         $sys_day =config("app.plan_expire_day");
         $sys_etime = date("Y-m-d H:i:s",strtotime("+".$sys_day." day"));

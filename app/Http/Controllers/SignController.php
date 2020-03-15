@@ -16,7 +16,7 @@ class  SignController extends Controller
     public function show($id)
     {
 //        $Sign = Sign::find($id);
-//        $return_data['Sign_title'] = $Sign['Sign_title'];  
+//        $return_data['Sign_title'] = $Sign['Sign_title'];
 //        $between_time = strtotime($Sign['Sign_etime'])-strtotime($Sign['Sign_stime']);
 //        $day = floor($between_time / (3600*24));
 //        $return_data['Sign_etime'] = $day;
@@ -31,20 +31,24 @@ class  SignController extends Controller
     public function store(Request $request)
     {
 
-        $data=[];
+
         //dd(json_encode($data));
         $input = $request->all();
         if(!isset($input['api_token']) || $input['api_token']!=config("app.api_token")) return response()->json(showMsg('201','token error',$data));
 
-
-        $find_sign = Sign::find($input['id']);
-        if(!is_null($find_sign)) return response()->json(showMsg('201','今天您已打卡',$data));
+        $where=[
+            'plan_id'=>$input['plan_id'],
+            'c_id'=>$input['c_id'],
+        ];
+        $find_sign = Sign::where($where)->get();
+        //dd($find_sign);
+        if(empty($find_sign->toArray())) return response()->json(showMsg('201','今天您已打卡'));
 
         $input['sign_time']=get_current_date();
         $input['is_sign']=1;
         $sign = Sign::create($input);
 
-        return response()->json(showMsg('200','success',$data));
+        return response()->json(showMsg('200','打卡成功'));
     }
 
     public function update(Request $request, Sign $Sign)

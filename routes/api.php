@@ -29,6 +29,18 @@ Route::post('plan', 'PlanController@store');
 Route::put('plan/{id}', 'PlanController@update');
 Route::delete('plan/{id}', 'PlanController@delete');
 
+
+//用户计划
+//Route::get('custom', 'CustomController@index');
+Route::post('custom/get', 'CustomController@index');
+Route::get('custom/{id}', 'CustomController@show');
+Route::post('custom', 'CustomController@store');
+Route::put('custom/{id}', 'CustomController@update');
+Route::delete('custom/{id}', 'CustomController@delete');
+
+
+
+
 //获取计划
 Route::get('sign', 'SignController@index');
 Route::get('sign/{id}', 'SignController@show');

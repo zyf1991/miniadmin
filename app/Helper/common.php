@@ -44,7 +44,17 @@ if(!function_exists("curl_response")){
         return $output;
     }
 }
+if(!function_exists("getUserOpenIdBycode")){
+    function getUserOpenIdBycode($code){
+        $APPID=config("app.AppID");
+        $AppSecret=config("app.AppSecret");
+        $JSCODE=$code;
+        $url=config("app.getOpenIdUrl")."appid=".$APPID."&secret=".$AppSecret."&js_code=".$JSCODE."&grant_type=authorization_code";
+        $response = curl_response($url);
 
+        return $response;
+    }
+}
 
 
 ?>
