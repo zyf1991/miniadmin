@@ -40,9 +40,8 @@ class  SignController extends Controller
             'plan_id'=>$input['plan_id'],
             'c_id'=>$input['c_id'],
         ];
-        $find_sign = Sign::where($where)->get();
-        //dd($find_sign);
-        if(empty($find_sign->toArray())) return response()->json(showMsg('201','今天您已打卡'));
+        $find_sign_count = Sign::where($where)->whereDate('sign_time','=',get_current_day())->count();
+        if($find_sign_count==1) return response()->json(showMsg('201','今天您已打卡'));
 
         $input['sign_time']=get_current_date();
         $input['is_sign']=1;

@@ -50,8 +50,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => public_path('videos/'.date("ymdHi",time()).'/'),
-            'url' => env('RESOURCE_APP_URL').'/videos',
+            'root' => public_path('uploads/'),
+            'url' => env('RESOURCE_APP_URL').'/uploads',
             'visibility' => 'public',
         ],
 
@@ -63,6 +63,7 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
+
 
         'admin' => [
             'driver' => 'local',

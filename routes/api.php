@@ -29,7 +29,9 @@ Route::post('plan', 'PlanController@store');
 Route::put('plan/{id}', 'PlanController@update');
 Route::delete('plan/{id}', 'PlanController@delete');
 
-
+//获取课程
+Route::post('course', 'CourseIndexController@show');
+Route::post('getcourse', 'CourseIndexController@free');
 //用户计划
 //Route::get('custom', 'CustomController@index');
 Route::post('custom/get', 'CustomController@index');

@@ -9,7 +9,17 @@ if (!function_exists('get_current_date')) {
         return date("Y-m-d H:i:s",get_current_time());
     }
 }
+if (!function_exists('get_current_day')) {
+    function get_current_day(){
+        return date("Y-m-d",get_current_time());
+    }
+}
 
+if (!function_exists('get_current_day_hour_minute')) {
+    function get_current_day_hour_minute(){
+        return date("YmdHi",get_current_time());
+    }
+}
 
 /**
  * 公用的方法  返回json数据，进行信息的提示

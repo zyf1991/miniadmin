@@ -35,6 +35,7 @@ class CustomController extends Controller
         if(!$request_data['code'])  return response()->json(showMsg(202,'error'));
 
         $input = $request_data->all();
+        //dd($input);
         $code = $input['code'];
         $openInfo = getUserOpenIdBycode($code);
 
