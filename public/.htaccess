@@ -5,17 +5,31 @@
 
     RewriteEngine On
 
+#    RewriteRule ^special/([0-9]+)$ /special/$1/ [L,R=301]
+#    RewriteRule ^special/([0-9]+)/newslist$ /special/$1/newslist/ [L,R=301]
+
+    # Serve Cached Page If Available...
+    RewriteCond %{REQUEST_URI} ^/?$
+    RewriteCond %{DOCUMENT_ROOT}/{HTTP_HOST}/index.html -f
+    RewriteRule .? {HTTP_HOST}/index.html [L]
+    RewriteCond %{DOCUMENT_ROOT}/%{HTTP_HOST}%{REQUEST_URI}/index.html -f
+    RewriteRule . %{HTTP_HOST}%{REQUEST_URI}/index.html [L]
+    RewriteCond %{DOCUMENT_ROOT}/%{HTTP_HOST}%{REQUEST_URI} -f
+    RewriteRule . %{HTTP_HOST}%{REQUEST_URI} [L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+#    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteCond %{REQUEST_URI} (.+)/$
+#    RewriteRule ^ %1 [L,R=301]
 
-    # Send Requests To Front Controller...
+    # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+
 </IfModule>
